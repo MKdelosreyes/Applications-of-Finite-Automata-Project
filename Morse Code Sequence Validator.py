@@ -20,7 +20,7 @@ def get_number(string):
 
 def get_letter(string):
     morse_code_dict = {
-        'A': '.-', 'B': '-...', 'D': '-..', 'E': '.',
+        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
         'F': '..-.', 'G': '--.', 'H': '....', 'I': '..',
         'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--',
         'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-',
@@ -35,152 +35,152 @@ def get_letter(string):
     return None
 
 
-def transition_letter(morse_str):
-    pattern = ""
-    word = ""
-    state = 0
-    space_count = 0;
+# def transition_letter(morse_str):
+#     pattern = ""
+#     word = ""
+#     state = 0
+#     space_count = 0;
 
-    # Transition table
-    table = [
-        [1, 4, 7],
-        [10, 2, 0],
-        [6, 3, 0],
-        [12, 12, 0],
-        [8, 5, 0],
-        [9, 12, 0],
-        [12, 7, 0],
-        [7, 7, 7],
-        [9, 9, 0],
-        [12, 12, 0],
-        [11, 6, 0],
-        [12, 12, 0],
-        [7, 7, 0],
-    ]
+#     # Transition table
+#     table = [
+#         [1, 4, 7],
+#         [10, 2, 0],
+#         [6, 3, 0],
+#         [12, 12, 0],
+#         [8, 5, 0],
+#         [9, 12, 0],
+#         [12, 7, 0],
+#         [7, 7, 7],
+#         [9, 9, 0],
+#         [12, 12, 0],
+#         [11, 6, 0],
+#         [12, 12, 0],
+#         [7, 7, 0],
+#     ]
 
-    for char in morse_str:
-        if char == '.':
-            pattern += '.'    # stores the encoded morse code string
-            input_val = 0
-            print(f"State: {state}")
-            space_count = 0
-        elif char == '-':
-            pattern += '-'
-            input_val = 1
-            print(f"State: {state}")
-            space_count = 0
-        elif char == ' ':
-            space_count += 1
+#     for char in morse_str:
+#         if char == '.':
+#             pattern += '.'    # stores the encoded morse code string
+#             input_val = 0
+#             print(f"State: {state}")
+#             space_count = 0
+#         elif char == '-':
+#             pattern += '-'
+#             input_val = 1
+#             print(f"State: {state}")
+#             space_count = 0
+#         elif char == ' ':
+#             space_count += 1
             
-            if space_count == 1:
-                # One space to decode a letter
-                if pattern:
-                    print(f"\nCurrent pattern: {pattern}")
-                    print(f"Overall State: {state}")
-                    letter = get_letter(pattern)
-                    print(f"Decoded letter: {letter}")
-                    if letter:
-                        word += letter  # stores decoded morse code sequence
-                    pattern = "" 
+#             if space_count == 1:
+#                 # One space to decode a letter
+#                 if pattern:
+#                     print(f"\nCurrent pattern: {pattern}")
+#                     print(f"Overall State: {state}")
+#                     letter = get_letter(pattern)
+#                     print(f"Decoded letter: {letter}")
+#                     if letter:
+#                         word += letter  # stores decoded morse code sequence
+#                     pattern = "" 
 
-            elif space_count == 3:
-                # Three spaces signify the end of a word
-                word += ' ' 
-                space_count = 0 
-                state = 0
-                input_val = 2
-                continue
-            input_val = 2
-        else:
-            return 0 
+#             elif space_count == 3:
+#                 # Three spaces signify the end of a word
+#                 word += ' ' 
+#                 space_count = 0 
+#                 state = 0
+#                 input_val = 2
+#                 continue
+#             input_val = 2
+#         else:
+#             return 0 
         
-        state = table[state][input_val]
+#         state = table[state][input_val]
 
-    if pattern:
-        letter = get_letter(pattern)
-        # print(f"Decoded letter: {letter}")
-        if letter:
-            word += letter
+#     if pattern:
+#         letter = get_letter(pattern)
+#         # print(f"Decoded letter: {letter}")
+#         if letter:
+#             word += letter
     
-    if state != 7:
-        print(f"Decoded word: {word}")
-        return 1
+#     if state != 7:
+#         print(f"Decoded word: {word}")
+#         return 1
 
-    return 0 
+#     return 0 
     
 
-def transition_number(morse_str):
-    pattern = ""
-    word = ""
-    state = 0
-    space_count = 0;
+# def transition_number(morse_str):
+#     pattern = ""
+#     word = ""
+#     state = 0
+#     space_count = 0;
 
-    # Transition table
-    table = [
-        [1, 2, 10],
-        [3, 14, 10],
-        [11, 4, 10],
-        [5, 15, 10],
-        [12, 6, 10],
-        [7, 16, 10],
-        [13, 8, 10],
-        [9, 9, 10],
-        [9, 9, 10],
-        [10, 10, 0],
-        [10, 10, 10],
-        [12, 10, 10],
-        [13, 10, 10],
-        [9, 10, 10],
-        [10, 15, 10],
-        [10, 16, 10],
-        [10, 9, 10],
-    ]
+#     # Transition table
+#     table = [
+#         [1, 2, 10],
+#         [3, 14, 10],
+#         [11, 4, 10],
+#         [5, 15, 10],
+#         [12, 6, 10],
+#         [7, 16, 10],
+#         [13, 8, 10],
+#         [9, 9, 10],
+#         [9, 9, 10],
+#         [10, 10, 0],
+#         [10, 10, 10],
+#         [12, 10, 10],
+#         [13, 10, 10],
+#         [9, 10, 10],
+#         [10, 15, 10],
+#         [10, 16, 10],
+#         [10, 9, 10],
+#     ]
 
-    for char in morse_str:
-        if char == '.':
-            pattern += '.'    # stores the encoded morse code string
-            input_val = 0
-            space_count = 0
-        elif char == '-':
-            pattern += '-'
-            input_val = 1
-            space_count = 0
-        elif char == ' ':
-            space_count += 1
+#     for char in morse_str:
+#         if char == '.':
+#             pattern += '.'    # stores the encoded morse code string
+#             input_val = 0
+#             space_count = 0
+#         elif char == '-':
+#             pattern += '-'
+#             input_val = 1
+#             space_count = 0
+#         elif char == ' ':
+#             space_count += 1
             
-            if space_count == 1:
-                # One space: decode a single digit
-                if pattern:
-                    print(f"Current pattern: {pattern}")
-                    digit = get_number(pattern)
-                    print(f"Decoded letter: {digit}")
-                    if digit:
-                        word += digit  
-                    pattern = ""  
+#             if space_count == 1:
+#                 # One space: decode a single digit
+#                 if pattern:
+#                     print(f"Current pattern: {pattern}")
+#                     digit = get_number(pattern)
+#                     print(f"Decoded letter: {digit}")
+#                     if digit:
+#                         word += digit  
+#                     pattern = ""  
                 
-                input_val = 2
-            elif space_count == 3:
-                # Three spaces signify the end of a word
-                word += ' ' 
-                space_count = 0 
-                state = 0
-                input_val = 2
-                continue
-        else:
-            return 0 
+#                 input_val = 2
+#             elif space_count == 3:
+#                 # Three spaces signify the end of a word
+#                 word += ' ' 
+#                 space_count = 0 
+#                 state = 0
+#                 input_val = 2
+#                 continue
+#         else:
+#             return 0 
         
-        state = table[state][input_val]
+#         state = table[state][input_val]
 
-    if pattern:
-        digit = get_number(pattern)
-        if digit:
-            word += digit
+#     if pattern:
+#         digit = get_number(pattern)
+#         if digit:
+#             word += digit
     
-    if state != 0 and state != 7:
-        print(f"Decoded word: {word}")
-        return 1
+#     if state != 0 and state != 7:
+#         print(f"Decoded word: {word}")
+#         return 1
 
-    return 0 
+#     return 0 
     
 # Helper function to check if pattern could be a number: Numbers have a length of 5 while lettes have <= 4
 def is_number_pattern(pattern):
